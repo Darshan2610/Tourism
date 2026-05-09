@@ -19,7 +19,7 @@
         --primary-light: #f8fafc;
         --accent-blue: #3b82f6;
         --accent-cyan: #06b6d4;
-        --accent-purple: #8b5cf6;
+        --accent-teal: #0d9488;
         --accent-rose: #f43f5e;
         --text-primary: #1e293b;
         --text-secondary: #64748b;
@@ -27,6 +27,10 @@
         --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.08);
         --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.12);
         --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.15);
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
@@ -41,7 +45,7 @@
       header {
         background: linear-gradient(135deg, var(--primary-dark) 0%, #1e3a8a 50%, var(--accent-blue) 100%);
         color: white;
-        padding: 80px 20px;
+        padding: 100px 20px 80px;
         text-align: center;
         position: relative;
         overflow: hidden;
@@ -55,7 +59,7 @@
         right: 0;
         bottom: 0;
         background: 
-          radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+          radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
           radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
         pointer-events: none;
       }
@@ -63,7 +67,6 @@
       header > * {
         position: relative;
         z-index: 1;
-        animation: slideDownFade 0.8s ease-out;
       }
 
       header h1 {
@@ -76,45 +79,16 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        animation: slideDownFade 0.8s ease-out;
       }
 
       header p {
-        font-size: clamp(1rem, 2.5vw, 1.3rem);
+        font-size: clamp(0.95rem, 2.5vw, 1.25rem);
         opacity: 0.95;
         font-weight: 300;
         letter-spacing: 0.5px;
         margin-top: 10px;
-      }
-
-      /* ===== ANIMATED BACKGROUND ELEMENTS ===== */
-      .floating-shape {
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0.1;
-        animation: float 6s ease-in-out infinite;
-      }
-
-      .shape-1 {
-        width: 200px;
-        height: 200px;
-        background: var(--accent-blue);
-        top: -50px;
-        right: 10%;
-        animation-delay: 0s;
-      }
-
-      .shape-2 {
-        width: 150px;
-        height: 150px;
-        background: var(--accent-cyan);
-        bottom: -30px;
-        left: 10%;
-        animation-delay: 2s;
-      }
-
-      @keyframes float {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-20px); }
+        animation: slideDownFade 0.8s ease-out 0.2s both;
       }
 
       @keyframes slideDownFade {
@@ -128,32 +102,59 @@
         }
       }
 
+      /* ===== FLOATING DECORATIVE ELEMENTS ===== */
+      .floating-element {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.08;
+        animation: float 8s ease-in-out infinite;
+      }
+
+      .element-1 {
+        width: 250px;
+        height: 250px;
+        background: var(--accent-blue);
+        top: -50px;
+        right: 10%;
+        animation-delay: 0s;
+      }
+
+      .element-2 {
+        width: 180px;
+        height: 180px;
+        background: var(--accent-cyan);
+        bottom: -40px;
+        left: 15%;
+        animation-delay: 2s;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-25px); }
+      }
+
       /* ===== CONTAINER & CARDS ===== */
       .container {
-        padding: 60px 5%;
+        padding: 80px 5%;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 35px;
+        gap: 40px;
         max-width: 1400px;
         margin: 0 auto;
         animation: fadeIn 1s ease-out 0.3s both;
       }
 
       @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
 
       .card {
         background: white;
-        border-radius: 20px;
+        border-radius: 24px;
         overflow: hidden;
         box-shadow: var(--shadow-md);
-        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         position: relative;
         border: 1px solid var(--border-color);
         animation: scaleInFade 0.6s ease-out both;
@@ -167,7 +168,7 @@
       @keyframes scaleInFade {
         from {
           opacity: 0;
-          transform: scale(0.9) translateY(20px);
+          transform: scale(0.9) translateY(25px);
         }
         to {
           opacity: 1;
@@ -176,7 +177,7 @@
       }
 
       .card:hover {
-        transform: translateY(-12px) scale(1.02);
+        transform: translateY(-16px) scale(1.02);
         box-shadow: var(--shadow-lg);
       }
 
@@ -186,10 +187,11 @@
         top: 0;
         left: 0;
         right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan), var(--accent-purple));
+        height: 5px;
+        background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan), var(--accent-teal));
         opacity: 0;
         transition: opacity 0.4s ease;
+        z-index: 10;
       }
 
       .card:hover::before {
@@ -199,62 +201,69 @@
       .card-image-wrapper {
         position: relative;
         overflow: hidden;
-        height: 240px;
+        height: 260px;
         background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
       }
 
-      .card-image-wrapper img {
+      .card img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        display: block;
       }
 
-      .card:hover .card-image-wrapper img {
-        transform: scale(1.1) rotate(2deg);
+      .card:hover img {
+        transform: scale(1.12) rotate(2deg);
       }
 
       .card-content {
-        padding: 28px;
+        padding: 32px;
       }
 
       .card-content h2 {
         font-family: 'DM Serif Display', serif;
-        font-size: 1.5rem;
-        margin-bottom: 12px;
+        font-size: 1.6rem;
+        margin-bottom: 14px;
         background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .card:hover .card-content h2 {
+        transform: translateX(4px);
       }
 
       .card-content p {
         font-size: 0.95rem;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
         color: var(--text-secondary);
-        line-height: 1.6;
+        line-height: 1.7;
       }
 
       .review {
         font-style: italic;
         color: #94a3b8;
-        padding: 12px;
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(6, 182, 212, 0.05));
-        border-left: 3px solid var(--accent-blue);
-        border-radius: 8px;
-        margin: 12px 0;
+        padding: 14px 16px;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.06), rgba(6, 182, 212, 0.06));
+        border-left: 4px solid var(--accent-blue);
+        border-radius: 10px;
+        margin: 16px 0;
         transition: all 0.3s ease;
       }
 
       .card:hover .review {
-        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1));
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(6, 182, 212, 0.12));
         border-left-color: var(--accent-cyan);
+        transform: translateX(4px);
       }
 
       .location {
         font-weight: 600;
-        margin-top: 15px;
+        margin-top: 18px;
         color: var(--text-primary);
         display: flex;
         align-items: center;
@@ -264,21 +273,16 @@
 
       .card:hover .location {
         color: var(--accent-blue);
-      }
-
-      /* ===== ISOLATED IMAGES ===== */
-      .container img:last-child,
-      .container img:nth-last-child(2) {
-        display: none;
+        transform: translateX(4px);
       }
 
       /* ===== CREATOR SECTION ===== */
       .creator-section {
-        margin: 80px 5%;
-        padding: 80px 5%;
+        margin: 100px 5%;
+        padding: 90px 5%;
         background: linear-gradient(135deg, var(--primary-dark) 0%, #1e3a8a 50%, var(--accent-blue) 100%);
         color: white;
-        border-radius: 30px;
+        border-radius: 32px;
         text-align: center;
         box-shadow: var(--shadow-lg);
         position: relative;
@@ -307,7 +311,7 @@
         left: -50%;
         width: 500px;
         height: 500px;
-        background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
         border-radius: 50%;
         pointer-events: none;
       }
@@ -330,18 +334,18 @@
       }
 
       .creator-section h2 {
-        font-size: 1.1rem;
-        margin-bottom: 15px;
+        font-size: 1.05rem;
+        margin-bottom: 18px;
         font-weight: 500;
-        letter-spacing: 1.5px;
+        letter-spacing: 2px;
         text-transform: uppercase;
-        opacity: 0.9;
+        opacity: 0.92;
       }
 
       .creator-section h1 {
         font-family: 'DM Serif Display', serif;
         font-size: clamp(2.2rem, 6vw, 4rem);
-        margin-bottom: 30px;
+        margin-bottom: 35px;
         font-weight: 700;
         letter-spacing: -1px;
         background: linear-gradient(135deg, #ffffff 0%, #e0f2fe 100%);
@@ -354,46 +358,32 @@
         font-size: 1.05rem;
         max-width: 700px;
         margin: 0 auto;
-        line-height: 1.8;
-        opacity: 0.95;
+        line-height: 1.85;
+        opacity: 0.96;
         font-weight: 300;
       }
 
       /* ===== FOOTER ===== */
       footer {
         text-align: center;
-        padding: 30px 20px;
+        padding: 35px 20px;
         background: linear-gradient(135deg, #0f172a, #1e293b);
         color: white;
-        margin-top: 60px;
+        margin-top: 80px;
         font-size: 0.95rem;
         font-weight: 500;
         letter-spacing: 0.5px;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
       }
 
-      /* ===== SCROLL ANIMATIONS ===== */
-      @media (prefers-reduced-motion: no-preference) {
-        .scroll-fade {
-          opacity: 0;
-          transform: translateY(20px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .scroll-fade.in-view {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
       /* ===== RESPONSIVE DESIGN ===== */
       @media (max-width: 768px) {
         header {
-          padding: 60px 20px;
+          padding: 70px 20px 60px;
         }
 
         header h1 {
-          font-size: 2rem;
+          font-size: 2.2rem;
         }
 
         header p {
@@ -401,8 +391,69 @@
         }
 
         .container {
-          padding: 40px 5%;
+          padding: 60px 5%;
+          gap: 30px;
+        }
+
+        .card {
+          border-radius: 18px;
+        }
+
+        .card-image-wrapper {
+          height: 220px;
+        }
+
+        .card-content {
+          padding: 24px;
+        }
+
+        .card-content h2 {
+          font-size: 1.3rem;
+        }
+
+        .creator-section {
+          margin: 70px 5%;
+          padding: 70px 5%;
+          border-radius: 24px;
+        }
+
+        .creator-section h1 {
+          font-size: 2.5rem;
+          margin-bottom: 25px;
+        }
+
+        .creator-section p {
+          font-size: 1rem;
+          line-height: 1.7;
+        }
+      }
+
+      @media (max-width: 480px) {
+        header {
+          padding: 50px 15px 40px;
+        }
+
+        header h1 {
+          font-size: 1.7rem;
+          margin-bottom: 10px;
+        }
+
+        header p {
+          font-size: 0.9rem;
+        }
+
+        .container {
+          grid-template-columns: 1fr;
+          padding: 40px 4%;
           gap: 25px;
+        }
+
+        .card {
+          border-radius: 16px;
+        }
+
+        .card-image-wrapper {
+          height: 200px;
         }
 
         .card-content {
@@ -410,45 +461,35 @@
         }
 
         .card-content h2 {
-          font-size: 1.2rem;
+          font-size: 1.25rem;
+          margin-bottom: 10px;
+        }
+
+        .card-content p {
+          font-size: 0.9rem;
+          margin-bottom: 10px;
+        }
+
+        .review {
+          padding: 12px 14px;
+          margin: 12px 0;
+          font-size: 0.9rem;
         }
 
         .creator-section {
-          margin: 60px 5%;
-          padding: 60px 5%;
+          margin: 50px 4%;
+          padding: 50px 4%;
           border-radius: 20px;
-        }
-
-        .creator-section h1 {
-          font-size: 2.2rem;
-          margin-bottom: 20px;
-        }
-
-        .creator-section p {
-          font-size: 1rem;
-        }
-      }
-
-      @media (max-width: 480px) {
-        header h1 {
-          font-size: 1.7rem;
-        }
-
-        header p {
-          font-size: 0.95rem;
-        }
-
-        .container {
-          grid-template-columns: 1fr;
-          padding: 30px 5%;
         }
 
         .creator-section h2 {
           font-size: 0.95rem;
+          margin-bottom: 15px;
         }
 
         .creator-section h1 {
           font-size: 1.8rem;
+          margin-bottom: 20px;
         }
 
         .creator-section p {
@@ -457,7 +498,17 @@
         }
 
         footer {
-          padding: 20px 15px;
+          padding: 25px 15px;
+          font-size: 0.9rem;
+        }
+      }
+
+      /* ===== ACCESSIBILITY ===== */
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
         }
       }
     </style>
@@ -465,8 +516,8 @@
 
   <body>
     <header>
-      <div class="floating-shape shape-1"></div>
-      <div class="floating-shape shape-2"></div>
+      <div class="floating-element element-1"></div>
+      <div class="floating-element element-2"></div>
       <h1>Explore Beautiful Places with Jain Darshan Rajesh</h1>
       <p>Discover amazing destinations, reviews, and experiences</p>
     </header>
@@ -474,22 +525,24 @@
     <div class="container">
       <div class="card">
         <div class="card-image-wrapper">
-          <img src="vim4.jpg" alt="Vimalnath Jain temple" />
+          <img src="vim1.png" alt="Place 1" />
+          <img src="vim2.png" alt="Place 1" />
         </div>
         <div class="card-content">
           <h2>Vimalnath Jain temple</h2>
           <p>
             A historic Jain temple with immense magical vibes, beautiful
-            architecture.
+            architechture.
           </p>
           <p class="review">"Good stay facility with pure satvik food."</p>
-          <p class="location">📍 Bangalore, Karnataka, India</p>
+          <p class="location">📍 Bangalore,Karnataka, India</p>
         </div>
       </div>
 
       <div class="card">
         <div class="card-image-wrapper">
-          <img src="nakodaji-1.png" alt="Nakodaji Temple" />
+          <img src="nakodaji-1.png" alt="Place 2" />
+          <img src="nakoda-2.jpg" alt="Place 2" />
         </div>
         <div class="card-content">
           <h2>Nakodaji Temple</h2>
@@ -501,29 +554,34 @@
 
       <div class="card">
         <div class="card-image-wrapper">
-          <img src="WhatsApp Image 2026-05-01 at 11.19.22 PM.jpeg" alt="Kaylana Lake" />
+          <img
+            src="WhatsApp Image 2026-05-01 at 11.19.22 PM.jpeg"
+            alt="Place 3"
+          />
         </div>
         <div class="card-content">
           <h2>Kaylana Lake</h2>
-          <p>A stunning scenery with lake</p>
+          <p>A stunning scenary with lake</p>
           <p class="review">"Amazing views."</p>
-          <p class="location">📍 Jodhpur, Rajasthan, India</p>
+          <p class="location">📍 Jodhpur Rajasthan, India</p>
         </div>
       </div>
-
       <div class="card">
         <div class="card-image-wrapper">
-          <img src="WhatsApp Image 2026-05-01 at 11.19.25 PM.jpeg" alt="Sri Big Bull Temple" />
+          <img
+            src="WhatsApp Image 2026-05-01 at 11.19.25 PM.jpeg"
+            alt="Place 3"
+          />
         </div>
         <div class="card-content">
-          <h2>Sri Big Bull Temple</h2>
+          <h2>KSri Big Bull Temple</h2>
           <p>Nandi temple</p>
-          <p class="location">📍 Basavanagudi, Bengaluru, India</p>
+          <p class="location">📍Basavanagudi, Bengaluru, India</p>
         </div>
       </div>
     </div>
 
-    <!-- CREATOR SECTION -->
+    <!-- ===== BIG CREATOR SECTION ===== -->
     <section class="creator-section">
       <div class="creator-content">
         <h2>Website Created By</h2>
@@ -540,26 +598,5 @@
     <footer>
       <p>© 2026 Tourism Explorer</p>
     </footer>
-
-    <script>
-      // Smooth scroll animations on page load
-      document.addEventListener('DOMContentLoaded', () => {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('in-view');
-            }
-          });
-        });
-
-        // Observe elements for scroll animations
-        document.querySelectorAll('.card').forEach((card) => {
-          observer.observe(card);
-        });
-      });
-
-      // Add smooth scroll behavior
-      document.documentElement.style.scrollBehavior = 'smooth';
-    </script>
   </body>
 </html>
